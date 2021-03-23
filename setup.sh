@@ -25,7 +25,7 @@ setup_vim () {
     fi
 
     mkdir -p $HOME/.vim/pack/plugins
-    link_file vim/.vimrc .vimrc
+    link_file .vimrc
     link_file vim/plugins .vim/pack/plugins/start
 }
 
