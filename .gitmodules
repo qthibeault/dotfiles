@@ -1,0 +1,27 @@
+[submodule "vim/plugins/auto-pairs"]
+	path = vim/plugins/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs
+[submodule "vim/plugins/lightline.vim"]
+	path = vim/plugins/lightline.vim
+	url = https://github.com/itchyny/lightline.vim
+[submodule "vim/plugins/vim-matchit"]
+	path = vim/plugins/vim-matchit
+	url = https://github.com/adelarsq/vim-matchit
+[submodule "vim/plugins/editorconfig-vim"]
+	path = vim/plugins/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim
+[submodule "vim/plugins/vim-commentary"]
+	path = vim/plugins/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "vim/plugins/vim-repeat"]
+	path = vim/plugins/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule "vim/plugins/vim-surround"]
+	path = vim/plugins/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "vim/plugins/vim-sensible"]
+	path = vim/plugins/vim-sensible
+	url = https://github.com/tpope/vim-sensible
+[submodule "vim/plugins/vim-unimpaired"]
+	path = vim/plugins/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired
