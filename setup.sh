@@ -19,16 +19,23 @@ link_file () {
 }
 
 setup_vim () {
+    if [ ! "$(ls -A vim/plugins)" ]; then
+        echo "Please checkout git submodules with command [git submodule --init --recursive]"
+        exit 1
+    fi
+
     mkdir -p $HOME/.vim/pack/plugins
-    link_file .vimrc
-    link_file vim-plugins .vim/pack/plugins/start
+    link_file vim/.vimrc .vimrc
+    link_file vim/plugins .vim/pack/plugins/start
 }
 
 setup_ohmyzsh () {
     if ! command_exists curl; then
         echo "Curl required for ZSH setup"
+        exit 1
     elif ! command_exists git; then
         echo "Git required for ZSH setup"
+        exit 1
     fi
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
