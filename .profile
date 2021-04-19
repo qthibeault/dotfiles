@@ -23,4 +23,3 @@ if [ -x $BREW_PATH ]; then
     eval $($BREW_PATH shellenv)
 fi
 
-export PATH="$HOME/.poetry/bin:$PATH"
