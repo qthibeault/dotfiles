@@ -43,6 +43,12 @@ if __name__ == "__main__":
     vim_dir = path.join(HOME_DIR, ".vim", "pack", "plugins", "start")
     zsh_dir = path.join(HOME_DIR, ".oh-my-zsh", "plugins")
 
+    parser = ArgumentParser()
+    parser.add_argument("--no-plugins", action="store_true", help="Do not copy plugin files")
+    parser.add_argument("--no-configs", action="store_true", help="Do not copy config files")
+
+    args = parser.parse_args()
+
     configs = config_paths()
     vim_plugins = plugin_paths("vim", vim_dir)
     zsh_plugins = plugin_paths("zsh", zsh_dir)
@@ -50,11 +56,11 @@ if __name__ == "__main__":
     makedirs(vim_dir, exist_ok=True)
     makedirs(zsh_dir, exist_ok=True)
 
-    config_msgs = [link_file(src, dest) for src, dest in configs.items()]
-    vim_msgs = [link_file(src, dest) for src, dest in vim_plugins.items()]
-    zsh_msgs = [link_file(src, dest) for src, dest in zsh_plugins.items()]
+    config_msgs = [link_file(src, dest) for src, dest in configs.items()] if not args.no_configs else []
+    vim_msgs = [link_file(src, dest) for src, dest in vim_plugins.items()] if not args.no_plugins else []
+    zsh_msgs = [link_file(src, dest) for src, dest in zsh_plugins.items()] if not args.no_plugins else []
 
     for msg in config_msgs + vim_msgs + zsh_msgs:
-        if len(msg) > 0:
+        if msg is not None:
             print(msg)
 

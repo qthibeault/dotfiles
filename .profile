@@ -18,3 +18,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+BREW_PATH="/home/linuxbrew/.linuxbrew/bin/brew" 
+if [ -x $BREW_PATH ]; then
+    eval $($BREW_PATH shellenv)
+fi
+
