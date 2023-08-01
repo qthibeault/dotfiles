@@ -354,6 +354,11 @@ local plugins = {
         },
     },
     {
+        "numToStr/Comment.nvim",
+        opts = {},
+        keys = {"gc", "gcc", "gb", "gbc"},
+    },
+    {
         "folke/which-key.nvim",
         opts = {
             H = { ":nohl<CR>", "Disable [H]ighlighting" },
