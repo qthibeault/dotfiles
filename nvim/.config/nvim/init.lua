@@ -463,6 +463,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         nmap("<leader>D", vim.lsp.buf.type_definition, "show type [D]efinition")
         nmap("<leader>rn", vim.lsp.buf.rename, "[r]e[n]ame")
         nmap("<leader>F", format, "[F]ormat")
+        nmap("<leader>a", vim.lsp.buf.code_action, "show code [a]ctions")
     end,
 })
 
