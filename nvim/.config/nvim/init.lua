@@ -15,6 +15,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
+vim.opt.termguicolors = true
 
 local plugins = {
     { "folke/lazy.nvim" },
@@ -359,13 +360,42 @@ local plugins = {
         keys = {"gc", "gcc", "gb", "gbc"},
     },
     {
+        "folke/todo-comments.nvim",
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+        },
+        opts = {},
+    },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+        },
+        keys = {
+            {"<leader>E", "<cmd>Neotree toggle<CR>", desc = "[E]xplorer" }
+        },
+        opts = {},
+    },
+    {
         "folke/which-key.nvim",
+        dependencies = {
+            {
+                "famiu/bufdelete.nvim",
+                config = false,
+            },
+        },
         opts = {
             H = { ":nohl<CR>", "Disable [H]ighlighting" },
+            M = { ":make<CR>", "[M]ake"},
+            T = { ":term<CR>", "[T]erminal"},
             d = { vim.diagnostic.open_float, "Show [d]iagnostic" },
             b = {
                 name = "[b]uffer",
-                a = { ":b#", "[a]lternate buffer" },
+                a = { ":b#<CR>", "[a]lternate buffer" },
+                d = { ":Bdelete<CR>", "[d]elete" },
+                w = { ":Bwipeout<CR>", "[w]ipeout"},
             },
             s = {
                 name = "[s]earch",
@@ -422,7 +452,6 @@ vim.opt.splitbelow = true -- Always split below
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.shortmess:append("c")
 
-vim.opt.termguicolors = true
 vim.cmd("colorscheme arctic")
 
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous [d]iagnostic" })
@@ -468,3 +497,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_augroup("UserAutoFormat", { clear = true })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+    group = vim.api.nvim_create_augroup("TerminalConfig", { clear = true }),
+    callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.signcolumn = "no"
+    end
+})
+
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
