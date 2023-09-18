@@ -1,6 +1,13 @@
 return {
     {
         "stevearc/dressing.nvim",
+        event = { "VeryLazy" },
+        opts = {},
+    },
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        event = { "VeryLazy" },
         opts = {},
     },
     {
@@ -60,11 +67,6 @@ return {
             show_trailing_blankline_indent = false,
         },
         main = "indent_blankline",
-    },
-    {
-        "famiu/bufdelete.nvim",
-        config = false,
-        cmd = { "Bdelete", "Bwipeout" },
     },
     {
         "folke/which-key.nvim",
