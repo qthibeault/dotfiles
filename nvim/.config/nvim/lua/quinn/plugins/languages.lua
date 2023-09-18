@@ -5,8 +5,7 @@ end
 local function has_words_before()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0
-        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 return {
@@ -89,7 +88,7 @@ return {
             { "neovim/nvim-lspconfig" },
             {
                 "folke/neodev.nvim",
-                opts = {}
+                opts = {},
             },
             { "simrat39/rust-tools.nvim" },
         },
@@ -103,7 +102,7 @@ return {
                 handlers = {
                     function(server_name)
                         local lsp_opts = {
-                            capabilities = default_capabilities
+                            capabilities = default_capabilities,
                         }
 
                         lspconfig[server_name].setup(lsp_opts)
@@ -155,8 +154,8 @@ return {
                         }
 
                         lspconfig.clangd.setup(lsp_opts)
-                    end
-                }
+                    end,
+                },
             }
 
             mason_lspconfig.setup(opts)
@@ -164,35 +163,39 @@ return {
         end,
     },
     {
-        "jose-elias-alvarez/null-ls.nvim",
-        event = { "BufReadPre" },
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local null_ls = require("null-ls")
-            local formatting = null_ls.builtins.formatting
-            local diagnostics = null_ls.builtins.diagnostics
+        "mhartington/formatter.nvim",
+        cmd = { "Format" },
+        opts = function()
+            local filetypes = require("formatter.filetypes")
+            local fourmolu = function()
+                return {
+                    exe = "fourmolu",
+                    args = {},
+                    stdin = false,
+                }
+            end
 
-            null_ls.setup({})
-            null_ls.register({
-                name = "default-lua",
-                sources = { formatting.stylua },
-            })
-            null_ls.register({
-                name = "default-python",
-                sources = {
-                    diagnostics.ruff,
-                    formatting.ruff,
-                    formatting.black,
+            return {
+                logging = true,
+                log_level = vim.log.levels.WARN,
+                filetype = {
+                    lua = { filetypes.lua.stylua },
+                    python = { filetypes.python.black },
+                    rust = { filetypes.rust.rustfmt },
+                    c = { filetypes.c.clangformat },
+                    cpp = { filetypes.c.clangformat },
+                    haskell = { fourmolu },
+                    ["*"] = { filetypes.any.remove_trailing_whitespace },
                 },
-            })
-            null_ls.register({
-                name = "default-haskell",
-                sources = { formatting.fourmolu },
-            })
-            null_ls.register({
-                name = "default-rust",
-                sources = { formatting.rustfmt },
-            })
+            }
+        end,
+    },
+    {
+        "mfussenegger/nvim-lint",
+        config = function()
+            require("lint").linters_by_ft = {
+                python = { "ruff" },
+            }
         end,
     },
 }
