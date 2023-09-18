@@ -1,8 +1,5 @@
 return {
     {
-        "MunifTanjim/nui.nvim"
-    },
-    {
         "stevearc/dressing.nvim",
         opts = {},
     },
@@ -38,8 +35,9 @@ return {
         dependencies = { "rktjmp/lush.nvim" },
         priority = 1000,
         lazy = false,
-        setup = function()
-        end
+        config = function()
+            vim.cmd([[colorscheme arctic]])
+        end,
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -70,35 +68,37 @@ return {
     },
     {
         "folke/which-key.nvim",
-        dependencies = { },
-        opts = {
-            E = { ":Neotree toggle<CR>", "[E]xplorer" },
-            H = { ":nohl<CR>", "Disable [H]ighlighting" },
-            M = { ":make<CR>", "[M]ake"},
-            T = { ":term<CR>", "[T]erminal"},
-            d = { vim.diagnostic.open_float, "Show [d]iagnostic" },
-            b = {
-                name = "[b]uffer",
-                a = { ":b#<CR>", "[a]lternate buffer" },
-                d = { ":Bdelete<CR>", "[d]elete" },
-                w = { ":Bwipeout<CR>", "[w]ipeout" },
-            },
-            s = {
-                name = "[s]earch",
-                b = { ":Telescope current_buffer_fuzzy_find<CR>", "search [b]uffer" },
-                o = { ":Telescope buffers<CR>", "search [o]pen buffers" },
-                f = { ":Telescope find_files<CR>", "search [f]iles" },
-                d = { ":Telescope diagnostics<CR>", "search [d]iagnostics" },
-                g = { ":Telescope live_grep<CR>", "search with [g]rep" },
-                w = { ":Telescope grep_string<CR>", "search [w]ord" },
-                s = { ":Telescope lsp_document_symbols<CR>", "search [s]ymbols" },
-            },
-            ["."] = { vim.lsp.buf.code_action, "code actions" },
-            ["<leader>"] = { ":Telescope buffers<CR>", "search open buffers" }
-        },
-        config = function(_, opts)
+        config = function()
+            local mappings = {
+                E = { ":Neotree toggle<CR>", "[E]xplorer" },
+                H = { ":nohl<CR>", "Disable [H]ighlighting" },
+                M = { ":make<CR>", "[M]ake" },
+                T = { ":term<CR>", "[T]erminal" },
+                d = { vim.diagnostic.open_float, "Show [d]iagnostic" },
+                b = {
+                    name = "[b]uffer",
+                    a = { ":b#<CR>", "[a]lternate buffer" },
+                    d = { ":Bdelete<CR>", "[d]elete" },
+                    w = { ":Bwipeout<CR>", "[w]ipeout" },
+                },
+                f = { ":HopChar2<CR>", "Hop [f]orward" },
+                s = {
+                    name = "[s]earch",
+                    b = { ":Telescope current_buffer_fuzzy_find<CR>", "search [b]uffer" },
+                    o = { ":Telescope buffers<CR>", "search [o]pen buffers" },
+                    f = { ":Telescope find_files<CR>", "search [f]iles" },
+                    d = { ":Telescope diagnostics<CR>", "search [d]iagnostics" },
+                    g = { ":Telescope live_grep<CR>", "search with [g]rep" },
+                    w = { ":Telescope grep_string<CR>", "search [w]ord" },
+                    s = { ":Telescope lsp_document_symbols<CR>", "search [s]ymbols" },
+                },
+                w = { ":HopWord<CR>", "Hop [w]ord" },
+                ["."] = { vim.lsp.buf.code_action, "code actions" },
+                ["<leader>"] = { ":Telescope buffers<CR>", "search open buffers" },
+            }
+
             require("which-key").setup()
-            require("which-key").register(opts, { prefix = "<leader>" })
+            require("which-key").register(mappings, { prefix = "<leader>" })
         end,
     },
 }

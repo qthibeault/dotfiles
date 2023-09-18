@@ -7,23 +7,20 @@ return {
             "MunifTanjim/nui.nvim",
         },
         opts = {},
-        cmd = { "Neotree" }
+        cmd = { "Neotree" },
     },
     {
         "nvim-telescope/telescope.nvim",
         version = "*",
         dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {},
         cmd = { "Telescope" },
+        opts = {},
     },
     {
         "phaazon/hop.nvim",
         branch = "v2",
+        cmd = { "HopChar2", "HopWord" },
         opts = {},
-        keys = {
-            { "<leader>f", ":HopChar2<CR>", desc = "Hop forward" },
-            { "<leader>w", ":HopWord<CR>", desc = "Hop word" },
-        },
     },
     {
         "kylechui/nvim-surround",
@@ -38,14 +35,12 @@ return {
     },
     {
         "numToStr/Comment.nvim",
+        keys = { "gc", "gcc", "gb", "gbc" },
         opts = {},
-        keys = {"gc", "gcc", "gb", "gbc"},
     },
     {
         "folke/todo-comments.nvim",
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-        },
+        dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
     },
 }

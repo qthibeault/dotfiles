@@ -32,5 +32,3 @@ vim.opt.splitbelow = true -- Always split below
 
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.shortmess:append("c")
-
-vim.cmd([[colorscheme arctic]])
