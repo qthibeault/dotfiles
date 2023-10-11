@@ -60,10 +60,11 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         event = { "BufReadPre" },
         opts = {
-            char = "┊",
-            show_trailing_blankline_indent = false,
+            indent = {
+                char = "┊",
+            },
         },
-        main = "indent_blankline",
+        main = "ibl",
     },
     {
         "folke/which-key.nvim",
