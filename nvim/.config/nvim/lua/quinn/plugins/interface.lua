@@ -73,6 +73,7 @@ return {
         config = function()
             local mappings = {
                 E = { ":Neotree toggle<CR>", "[E]xplorer" },
+                F = { ":Format<CR>", "[F]ormat" },
                 H = { ":nohl<CR>", "Disable [H]ighlighting" },
                 M = { ":make<CR>", "[M]ake" },
                 T = { ":term<CR>", "[T]erminal" },
