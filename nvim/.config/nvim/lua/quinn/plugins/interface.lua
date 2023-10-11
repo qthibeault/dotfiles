@@ -42,9 +42,6 @@ return {
         dependencies = { "rktjmp/lush.nvim" },
         priority = 1000,
         lazy = false,
-        config = function()
-            vim.cmd([[colorscheme arctic]])
-        end,
     },
     {
         "lewis6991/gitsigns.nvim",
