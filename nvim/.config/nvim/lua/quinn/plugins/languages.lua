@@ -163,6 +163,7 @@ return {
 
             mason_lspconfig.setup(opts)
             lspconfig.hls.setup({ capabilities = default_capabilities })
+            lspconfig.ocamllsp.setup({ capabilities = default_capabilities })
         end,
     },
     {
